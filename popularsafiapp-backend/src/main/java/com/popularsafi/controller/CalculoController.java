@@ -3,9 +3,6 @@ package com.popularsafi.controller;
 import com.popularsafi.dto.CalculoDTO;
 import com.popularsafi.model.CalculoIC;
 import com.popularsafi.service.ICalculoICService;
-import com.popularsafi.service.ProvisionResponseRest;
-import com.popularsafi.util.CategoryExcelExporter;
-import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.slf4j.Logger;
@@ -16,7 +13,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
@@ -85,38 +81,6 @@ public class CalculoController {
         return response;
     }*/
 
-
-    /**
-     * export to excel file
-     * @param response
-     * @throws IOException
-     */
-    @GetMapping("/provision/export/excel")
-    public void exportToExcel(HttpServletResponse response) throws IOException {
-        response.setContentType("application/octet-stream");
-        String headerKey = "Content-Disposition";
-        String headerValue = "attachment; filename=result_category.xlsx";
-        response.setHeader(headerKey, headerValue);
-        ResponseEntity<ProvisionResponseRest> responseEntity = imprimirReporteFecha("String fechaParam");
-        CategoryExcelExporter excelExporter = new CategoryExcelExporter(
-                responseEntity.getBody().getProvisionResponse().getProvision());
-        excelExporter.export(response);
-    }
-
-    //@Override
-    public ResponseEntity<ProvisionResponseRest> imprimirReporteFecha(String fechaParam) {
-        ProvisionResponseRest response = new ProvisionResponseRest();
-        try {
-            List<CalculoIC> lista  = serv.findAll();
-            response.getProvisionResponse().setProvision(lista);
-            response.setMetadata("Respuesta ok", "00", "Respuesta exitosa");
-        } catch (Exception e) {
-            response.setMetadata("Respuesta nok", "-1", "Error al consultar");
-            e.getStackTrace();
-            return new ResponseEntity<ProvisionResponseRest>(response, HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-        return new ResponseEntity<ProvisionResponseRest>(response, HttpStatus.OK);
-    }
 
 
 }

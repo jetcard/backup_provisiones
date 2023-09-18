@@ -7,6 +7,7 @@ import lombok.*;
 @NoArgsConstructor
 public class CalculoDTO {
     private String DVALOR_BV;
+    private String CMONEDA;
     private Integer NCUOTA;
     private String FDESEMBOLSO;
     private String MONTO;

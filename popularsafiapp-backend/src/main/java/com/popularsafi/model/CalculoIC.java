@@ -15,6 +15,8 @@ public class CalculoIC {
     @Id
     @Column(name="DVALOR_BV")
     private String DVALOR_BV;
+    @Column(name="CMONEDA")
+    private String CMONEDA;
     @Column(name="NCUOTA")
     private Integer NCUOTA;
     @Column(name="FDESEMBOLSO")

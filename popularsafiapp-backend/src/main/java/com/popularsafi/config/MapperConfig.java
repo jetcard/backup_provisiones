@@ -44,6 +44,7 @@ import java.text.SimpleDateFormat;
             //Escritura
             TypeMap<CalculoDTO, CalculoIC> typeMap1 = mapper.createTypeMap(CalculoDTO.class, CalculoIC.class);
             typeMap1.addMapping(CalculoDTO::getDVALOR_BV, (dest, v) -> dest.setDVALOR_BV((String) v));
+            typeMap1.addMapping(CalculoDTO::getCMONEDA, (dest, v) -> dest.setCMONEDA((String) v));
             typeMap1.addMapping(CalculoDTO::getNCUOTA, (dest, v) -> dest.setNCUOTA((Integer) v));
             typeMap1.addMapping(CalculoDTO::getFDESEMBOLSO, (dest, v) -> dest.setFDESEMBOLSO((String) v));
             typeMap1.addMapping(CalculoDTO::getMONTO, (dest, v) -> dest.setMONTO((String) v));

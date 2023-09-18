@@ -14,7 +14,6 @@ import org.apache.poi.xssf.usermodel.XSSFFont;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
-
 import jakarta.servlet.ServletOutputStream;
 import jakarta.servlet.http.HttpServletResponse;
 
@@ -30,33 +29,36 @@ public class CategoryExcelExporter {
         workbook = new XSSFWorkbook();
     }
 
-    private void writeHeaderLine() {
-        sheet = workbook.createSheet("Reporte de códigos de cuotas generadas al  ");
-
-        CellRangeAddress mergedRegion = new CellRangeAddress(0,0,1,12);
-        sheet.addMergedRegion(mergedRegion);
-        mergedRegion = new CellRangeAddress(2,3,1,1);
-        sheet.addMergedRegion(mergedRegion);
-        mergedRegion = new CellRangeAddress(2,3,2,2);
-        sheet.addMergedRegion(mergedRegion);
-        mergedRegion = new CellRangeAddress(2,3,3,3);
-        sheet.addMergedRegion(mergedRegion);
-        mergedRegion = new CellRangeAddress(2,3,4,4);
-        sheet.addMergedRegion(mergedRegion);
-        mergedRegion = new CellRangeAddress(2,3,5,5);
-        sheet.addMergedRegion(mergedRegion);
-        mergedRegion = new CellRangeAddress(2,3,6,6);
-        sheet.addMergedRegion(mergedRegion);
-        mergedRegion = new CellRangeAddress(2,3,7,7);
-        sheet.addMergedRegion(mergedRegion);
-        mergedRegion = new CellRangeAddress(2,3,8,8);
-        sheet.addMergedRegion(mergedRegion);
-        mergedRegion = new CellRangeAddress(2,3,9,9);
-        sheet.addMergedRegion(mergedRegion);
-        mergedRegion = new CellRangeAddress(2,2,11,12);
-        sheet.addMergedRegion(mergedRegion);
-        mergedRegion = new CellRangeAddress(2,3,13,13);
-        sheet.addMergedRegion(mergedRegion);
+    private void writeHeaderLine(String fechaProceso) {
+        sheet = workbook.createSheet("Reporte de códigos de cuotas generadas al "+fechaProceso);
+        sheet.setDisplayGridlines(false);
+        sheet.setColumnWidth(3, 25 * 256);
+        sheet.setColumnWidth(4, 25 * 256);
+        sheet.setColumnWidth(5, 25 * 256);
+        CellRangeAddress mergedRegion0 = new CellRangeAddress(0,0,1,12);
+        sheet.addMergedRegion(mergedRegion0);
+        CellRangeAddress mergedRegion1 = new CellRangeAddress(2,3,1,1);
+        sheet.addMergedRegion(mergedRegion1);
+        CellRangeAddress mergedRegion2 = new CellRangeAddress(2,3,2,2);
+        sheet.addMergedRegion(mergedRegion2);
+        CellRangeAddress mergedRegion3 = new CellRangeAddress(2,3,3,3);
+        sheet.addMergedRegion(mergedRegion3);
+        CellRangeAddress mergedRegion4 = new CellRangeAddress(2,3,4,4);
+        sheet.addMergedRegion(mergedRegion4);
+        CellRangeAddress mergedRegion5 = new CellRangeAddress(2,3,5,5);
+        sheet.addMergedRegion(mergedRegion5);
+        CellRangeAddress mergedRegion6 = new CellRangeAddress(2,3,6,6);
+        sheet.addMergedRegion(mergedRegion6);
+        CellRangeAddress mergedRegion7 = new CellRangeAddress(2,3,7,7);
+        sheet.addMergedRegion(mergedRegion7);
+        CellRangeAddress mergedRegion8 = new CellRangeAddress(2,3,8,8);
+        sheet.addMergedRegion(mergedRegion8);
+        CellRangeAddress mergedRegion9 = new CellRangeAddress(2,3,9,9);
+        sheet.addMergedRegion(mergedRegion9);
+        CellRangeAddress mergedRegion10 = new CellRangeAddress(2,2,11,12);
+        sheet.addMergedRegion(mergedRegion10);
+        CellRangeAddress mergedRegion11 = new CellRangeAddress(2,3,13,13);
+        sheet.addMergedRegion(mergedRegion11);
 
         Row row0 = sheet.createRow(0);
         CellStyle styleTop = workbook.createCellStyle();
@@ -65,15 +67,11 @@ public class CategoryExcelExporter {
         font.setFontHeight(11);
         styleTop.setFont(font);
         styleTop.setAlignment(HorizontalAlignment.CENTER);
-        createCell(row0, 1, "Reporte de códigos de cuotas generadas al  31/07/2023", styleTop);
+        createCell(row0, 1, "Reporte de códigos de cuotas generadas al "+fechaProceso, styleTop);
 
         Row row = sheet.createRow(2);
 
         CellStyle styleHeaders = workbook.createCellStyle();
-        styleHeaders.setBorderTop(BorderStyle.THIN);
-        styleHeaders.setBorderBottom(BorderStyle.THIN);
-        styleHeaders.setBorderLeft(BorderStyle.THIN);
-        styleHeaders.setBorderRight(BorderStyle.THIN);
         styleHeaders.setVerticalAlignment(VerticalAlignment.CENTER);
         styleHeaders.setAlignment(HorizontalAlignment.CENTER);
         styleHeaders.setWrapText(true);
@@ -81,16 +79,18 @@ public class CategoryExcelExporter {
         font.setFontHeight(11);
         styleHeaders.setFont(font);
 
-        CellStyle styleHeaderIdx = workbook.createCellStyle();
-        styleHeaderIdx.setBorderTop(BorderStyle.THIN);
-        styleHeaderIdx.setBorderBottom(BorderStyle.THIN);
-        styleHeaderIdx.setBorderLeft(BorderStyle.THIN);
-        styleHeaderIdx.setBorderRight(BorderStyle.THIN);
-        styleHeaderIdx.setVerticalAlignment(VerticalAlignment.CENTER);
-        styleHeaderIdx.setAlignment(HorizontalAlignment.CENTER);
+
+        CellStyle styleHeadersCuotasIC = workbook.createCellStyle();
+        styleHeadersCuotasIC.setVerticalAlignment(VerticalAlignment.CENTER);
+        styleHeadersCuotasIC.setAlignment(HorizontalAlignment.CENTER);
+        styleHeadersCuotasIC.setBorderTop(BorderStyle.THIN);
+        styleHeadersCuotasIC.setBorderBottom(BorderStyle.THIN);
+        styleHeadersCuotasIC.setBorderLeft(BorderStyle.THIN);
+        styleHeadersCuotasIC.setBorderRight(BorderStyle.THIN);
+        styleHeadersCuotasIC.setWrapText(true);
         font.setBold(true);
         font.setFontHeight(11);
-        styleHeaderIdx.setFont(font);
+        styleHeadersCuotasIC.setFont(font);
 
         CellStyle styleHeaderYellow = workbook.createCellStyle();
         styleHeaderYellow.setFillForegroundColor(IndexedColors.YELLOW.getIndex());
@@ -105,7 +105,7 @@ public class CategoryExcelExporter {
         font.setFontHeight(11);
         styleHeaderYellow.setFont(font);
 
-        createCell(row, 1, "N°", styleHeaderIdx);
+        createCell(row, 1, "N°", styleHeaders);
         createCell(row, 2, "CÓDIGO", styleHeaders);
         createCell(row, 3, "Moneda", styleHeaders);
         createCell(row, 4, "N° CUOTA", styleHeaders);
@@ -114,14 +114,34 @@ public class CategoryExcelExporter {
         createCell(row, 7, "CAPITAL ADEUDADO CRONOGRAMA", styleHeaders);
         createCell(row, 8, "TEA", styleHeaders);
         createCell(row, 9, "DÍAS TRANSC AL CIERRE", styleHeaders);
-        createCell(row, 10, "CUOTA", styleHeaders);
+        createCell(row, 10, "CUOTA", styleHeadersCuotasIC);
         createCell(row, 11, "PROVISIÓN", styleHeaders);
         createCell(row, 13, "TOTAL", styleHeaders);
 
         Row row3 = sheet.createRow(3);
-        createCell(row3, 10, "INTERÉS COMPENSATORIO", styleHeaders);
+        createCell(row3, 10, "INTERÉS COMPENSATORIO", styleHeadersCuotasIC);
         createCell(row3, 11, "INTERÉS PROVISIÓN", styleHeaderYellow);
         createCell(row3, 12, "IGV", styleHeaders);
+
+        setBordersToMergedCells(sheet, mergedRegion1);
+        setBordersToMergedCells(sheet, mergedRegion2);
+        setBordersToMergedCells(sheet, mergedRegion3);
+        setBordersToMergedCells(sheet, mergedRegion4);
+        setBordersToMergedCells(sheet, mergedRegion5);
+        setBordersToMergedCells(sheet, mergedRegion6);
+        setBordersToMergedCells(sheet, mergedRegion7);
+        setBordersToMergedCells(sheet, mergedRegion8);
+        setBordersToMergedCells(sheet, mergedRegion9);
+        setBordersToMergedCells(sheet, mergedRegion10);
+        setBordersToMergedCells(sheet, mergedRegion11);
+/*
+        int width = 33; // Where width is number of caracters
+        sheet.setDefaultColumnWidth(width);*/
+        /*
+        sheet.setColumnWidth(3, 25 * 256);
+        sheet.setColumnWidth(4, 25 * 256);
+        sheet.setColumnWidth(5, 25 * 256);
+        */
     }
 
     private void createCell(Row row, int columnCount, Object value, CellStyle style) {
@@ -172,6 +192,13 @@ public class CategoryExcelExporter {
         styleDate.setBorderRight(BorderStyle.THIN);
         styleDate.setAlignment(HorizontalAlignment.CENTER);
 
+        CellStyle styleLeft = workbook.createCellStyle();
+        styleLeft.setBorderTop(BorderStyle.THIN);
+        styleLeft.setBorderBottom(BorderStyle.THIN);
+        styleLeft.setBorderLeft(BorderStyle.THIN);
+        styleLeft.setBorderRight(BorderStyle.THIN);
+        styleLeft.setAlignment(HorizontalAlignment.LEFT);
+
         CellStyle styleYellow = workbook.createCellStyle();
         styleYellow.setFillForegroundColor(IndexedColors.YELLOW.getIndex());
         styleYellow.setFillPattern(FillPatternType.SOLID_FOREGROUND);
@@ -188,8 +215,8 @@ public class CategoryExcelExporter {
             Row row = sheet.createRow(rowCount++);
             int columnCount = 1;
             createCell(row, columnCount++, ++contadorRegistros, style);
-            createCell(row, columnCount++, result.getDVALOR_BV(), style);
-            createCell(row, columnCount++, "S/.", style);
+            createCell(row, columnCount++, result.getDVALOR_BV(), styleLeft);
+            createCell(row, columnCount++, result.getCMONEDA(), styleLeft);
             createCell(row, columnCount++, result.getNCUOTA(), style);
             createCell(row, columnCount++, result.getFDESEMBOLSO(), styleDate);
             createCell(row, columnCount++, result.getFPAGO(), styleDate);
@@ -204,17 +231,21 @@ public class CategoryExcelExporter {
     }
 
 
-    public void export(HttpServletResponse response) throws IOException {
+    public void export(HttpServletResponse response, String fechaExcel) throws IOException {
 
-        writeHeaderLine(); //write the header
+        writeHeaderLine(fechaExcel); //write the header
         writeDataLines(); //write the data
 
         ServletOutputStream servletOutput = response.getOutputStream();
         workbook.write(servletOutput);
         workbook.close();
-
         servletOutput.close();
+    }
 
-
+    protected void setBordersToMergedCells(Sheet sheet, CellRangeAddress rangeAddress) {
+        RegionUtil.setBorderTop(BorderStyle.THIN, rangeAddress, sheet);
+        RegionUtil.setBorderLeft(BorderStyle.THIN, rangeAddress, sheet);
+        RegionUtil.setBorderRight(BorderStyle.THIN, rangeAddress, sheet);
+        RegionUtil.setBorderBottom(BorderStyle.THIN, rangeAddress, sheet);
     }
 }

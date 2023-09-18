@@ -48,7 +48,7 @@ public class CalculoICServiceImpl extends CRUDImpl<CalculoIC, Long> implements I
         DateFormat dateFormat0 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         logger.info("TimeUnitMillis "+dateFormat0.format(System.currentTimeMillis()));
         try {
-            StoredProcedureQuery storedProcedure = entityManager.createStoredProcedureQuery("SACIF.Dias_genera_IC");
+            StoredProcedureQuery storedProcedure = entityManager.createStoredProcedureQuery("SACIF.Dias_genera_IC2");
             storedProcedure.registerStoredProcedureParameter("cFProceso", Date.class, ParameterMode.IN);
             SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
             Date fechaProceso = dateFormat.parse(fechaParam);
