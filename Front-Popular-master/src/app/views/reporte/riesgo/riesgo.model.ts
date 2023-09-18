@@ -1,6 +1,7 @@
 export interface Riesgo {
  
   dvalor_BV: string;
+  cmoneda: string;
   ncuota: string;
   fdesembolso: string;
   fpago: string;

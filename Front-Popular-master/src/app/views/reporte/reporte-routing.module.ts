@@ -5,7 +5,7 @@ import { MatTableModule } from '@angular/material/table';
 
 const routes: Routes = [
   {
-    path: 'riesgo',
+    path: 'provisiones',
     component: RiesgoComponent,
     data: {
       title: 'Riesgo',

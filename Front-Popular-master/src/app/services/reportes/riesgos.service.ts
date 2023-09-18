@@ -10,6 +10,7 @@ import { environment } from 'environments/environment';
 })
 export class RiesgosService {
   private apiUrl = `${environment.apiURL}/reporte-calculo`;
+  private apiUrl2 = `${environment.apiURL}/reporte-excel`;
 
 
   private reporteServices = btoa('user:b4530586-15c6-43cf-8c1d-960f426f1986');
@@ -72,7 +73,7 @@ export class RiesgosService {
     });
   }
 
-
+/*
   getReporteRiesgo2(fechaFormateada: String): Observable<any[]> {
     const token = JSON.parse(sessionStorage.getItem("JWT_TOKEN"));
     console.log("getreporte"+token.jwtToken)
@@ -84,21 +85,22 @@ export class RiesgosService {
       headers: new HttpHeaders().set('Authorization', `Bearer ${token.jwtToken}`).set('Content-Type', 'application/json')
     });
   }
-
+*/
   /**
    * export excel categories
    */
-    exportCategories(){
+    exportCategories(fechaFormateada: String){
       const token = JSON.parse(sessionStorage.getItem("JWT_TOKEN"));
       const headers = new HttpHeaders({
         Authorization: `Basic ${this.authService.getReporteServices()}`,
       });
-      const url = `${this.apiUrl}/provision/export/excel`;
+      const url = `${this.apiUrl2}/provision/export/excel?fechaExcel=${fechaFormateada}`;
       return this.http.get(url, {
         headers: new HttpHeaders().set('Authorization', `Bearer ${token.jwtToken}`).set('Content-Type', 'application/json'),
         responseType: 'blob'
       });
     }
+    /*
   exportaCategories(): Observable<any>{
     const token = JSON.parse(sessionStorage.getItem("JWT_TOKEN"));
     const headers = new HttpHeaders({
@@ -108,7 +110,7 @@ export class RiesgosService {
     return this.http.get<string>(url, {
       headers: new HttpHeaders().set('Authorization', `Bearer ${token.jwtToken}`).set('Content-Type', 'application/json')
     });
-  }
+  }*/
 
 
   getDataConf() {
@@ -120,6 +122,10 @@ export class RiesgosService {
         prop: 'dvalor_BV',
         name: 'dvalor_BV',
       },
+      {
+        prop: 'cmoneda',
+        name: 'cmoneda',
+      },      
       {
         prop: 'ncuota',
         name: 'ncuota',

@@ -37,6 +37,7 @@ export class RiesgoComponent implements OnInit, AfterViewInit {
 
   displayedColumns: string[] = [
     'dvalor_BV',
+    'cmoneda',
     'ncuota',
     'fdesembolso',
     'fpago',
@@ -146,7 +147,7 @@ export class RiesgoComponent implements OnInit, AfterViewInit {
   // Lógica para manejar el evento 'touchstart'
   // Puedes agregar aquí cualquier código que necesites ejecutar cuando se detecte el evento 'touchstart'
   }
-  exportToExcel(): void {
+  /*exportToExcel(): void {
    let data= this.reportesRiesgo;
     console.log(data.length);
     if (data.length>0){
@@ -157,21 +158,24 @@ export class RiesgoComponent implements OnInit, AfterViewInit {
       workbook.SheetNames.push('Hoja 1');
       workbook.Sheets['Hoja 1'] = worksheet;
 
-      XLSX.writeFileXLSX(workbook, this.name, {});
+      XLSX.writeFileXLSX(workbook, "AS"+this.name, {});
     }else{
       this._snackBar.open("No hay informacion", 'INFO', {duration: 3000, horizontalPosition: 'right', verticalPosition: 'top'});
     }
 
-  }
+  }*/
 
 
   exportExcel(){
-    this.riesgosService.exportCategories()
+    var lfecha = this.fechaSeleccionada;
+    const fechaFormateada = moment(lfecha).format("DD-MM-YYYY");
+    const lfechaExcel = moment(lfecha).format("DDMMMYYYY");
+    this.riesgosService.exportCategories(fechaFormateada)
         .subscribe( (data: any) => {
           let file = new Blob([data], {type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'});
           let fileUrl = URL.createObjectURL(file);
           var anchor = document.createElement("a");
-          anchor.download = "CAP-ProvisionIC.xlsx";
+          anchor.download = "CAP-ProvisionIC"+lfechaExcel+".xlsx";
           anchor.href = fileUrl;
           anchor.click();
 

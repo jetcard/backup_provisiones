@@ -37,7 +37,7 @@ export class NavigationService {
       tooltip: 'Reporte',
       icon: 'task',
       sub: [
-        { name: 'Provisiones', state: 'reporte/riesgo' },
+        { name: 'Provisiones', state: 'reporte/provisiones' },
         { name: 'Valorización ', state: 'reporte/valorizacion' },
            { name: 'Analytics Alt', state: 'dashboard/analytics-alt' },
            { name: 'Cryptocurrency', state: 'dashboard/crypto' },
