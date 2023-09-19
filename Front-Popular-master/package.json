@@ -41,6 +41,7 @@
     "hopscotch": "^0.3.1",
     "keycloak-angular": "^13.1.0",
     "keycloak-js": "^21.1.2",
+    "material-spinner": "^0.0.9",
     "moment": "^2.29.4",
     "ng-apexcharts": "^1.7.1",
     "ng2-charts": "^4.0.0",

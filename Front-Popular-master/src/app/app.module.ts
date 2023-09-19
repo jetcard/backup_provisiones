@@ -30,6 +30,8 @@ import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 import { KeycloakAngularModule , KeycloakService} from 'keycloak-angular';
 ///import { SocialLoginModule, SocialAuthServiceConfig } from '@abacritt/angularx-social-login';
 ///import { GoogleLoginProvider } from '@abacritt/angularx-social-login';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { LoaderInterceptor } from './views/reporte/riesgo/loader.interceptor';
 
 function initializeKeycloak(keycloak: KeycloakService) {
   return () =>
@@ -75,7 +77,8 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     }),
     InMemoryWebApiModule.forRoot(InMemoryDataService, { passThruUnknownUrl: true }),
     RouterModule.forRoot(rootRouterConfig, { useHash: false }),
-    KeycloakAngularModule
+    KeycloakAngularModule,
+    MatProgressSpinnerModule
     ///SocialLoginModule
   ],
   declarations: [AppComponent, DashboardComponent],
@@ -87,6 +90,11 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     {
       provide: HTTP_INTERCEPTORS,
       useClass: TokenInterceptor,
+      multi: true,
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: LoaderInterceptor,
       multi: true,
     },
     ///RiesgosService,

@@ -1,5 +1,6 @@
 <div class="body-container" id="div1" >
-  <mat-label>Fecha</mat-label>
+
+  <!--mat-label>Fecha</mat-label-->
 
   <mat-form-field class="md-12 container-fluid">
     <input
@@ -8,7 +9,7 @@
       placeholder="FECHA"
       [matDatepicker]="appDatepicker"
       [(ngModel)]="fechaSeleccionada"
-      (ngModelChange)="obtenerDatosUsuario()"
+      (ngModelChange)="obtenerReporteProvisiones()"
     />
     <mat-hint>DD/MM/YYYY</mat-hint>
 
@@ -31,10 +32,12 @@ Exportar a Excel
 
 </div>
 <hr>
+
 <div class="example-container">
+
   <table  mat-table
     [dataSource]="dataSource"
-    id="season-tble"
+    id="season-tble" 
   >
 
     <ng-container matColumnDef="dvalor_BV">
@@ -112,16 +115,34 @@ Exportar a Excel
     <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
   </table>
 </div>
-
+<!--div *ngIf="isLoading">
+ 
+  <mat-spinner></mat-spinner>
+ 
+</div-->
 
 <mat-paginator [pageSizeOptions]="[ 5,10,20,50, 100]" [length]="totalElements" aria-label="Select page of riesgo" (page)="showMore($event)"></mat-paginator>
 
-<div *ngIf="totalElements === 0">
-  <!--p>No se encontraron datos para la fecha seleccionada.</p-->
-  <p>Por favor indique una fecha.</p>
-</div>
-<div>
-  <br /><!--br />
+<div *ngIf="(isLoading | async); then loading else content"></div>
+<ng-template #loading>
+  <div class="overlay">
+    <div class="spinner"></div>
+  </div>
+</ng-template>
+<ng-template #content>
+  <div *ngIf="totalElements === 0 && mostrarMensaje"> 
+    <p>Por favor indique una fecha.</p>
+  </div>
+</ng-template>
 
-  <br /><br /><br /><br /><br /><br /><br /><br /><br /-->
+
+<!--div *ngIf="isLoading | async" class="overlay">
+  <div class="spinner"></div>
+  <--mat-progress-spinner value=100  mode="indeterminate"></mat-progress-spinner- ->
 </div>
+<div *ngIf="totalElements === 0"> 
+  <--p>No se encontraron datos para la fecha seleccionada.</p- ->
+  <p>Por favor indique una fecha.</p>
+</div-->
+
+

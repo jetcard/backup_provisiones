@@ -2,13 +2,14 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 ///import { Riesgo } from 'app/views/reporte/riesgo/riesgo.model';
 import { AuthService } from 'auth.service';
-import { Observable } from 'rxjs';
+import { Observable, Subject  } from 'rxjs';
 import { JwtAuthService } from 'app/shared/services/auth/jwt-auth.service';
 import { environment } from 'environments/environment';
 @Injectable({
   providedIn: 'root'
 })
 export class RiesgosService {
+  isLoading = new Subject<boolean>();
   private apiUrl = `${environment.apiURL}/reporte-calculo`;
   private apiUrl2 = `${environment.apiURL}/reporte-excel`;
 
@@ -100,6 +101,13 @@ export class RiesgosService {
         responseType: 'blob'
       });
     }
+    show() {
+      this.isLoading.next(true);
+   }
+ 
+   hide() {
+      this.isLoading.next(false);
+   }
     /*
   exportaCategories(): Observable<any>{
     const token = JSON.parse(sessionStorage.getItem("JWT_TOKEN"));

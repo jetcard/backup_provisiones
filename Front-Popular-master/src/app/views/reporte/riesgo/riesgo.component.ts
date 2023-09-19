@@ -2,18 +2,21 @@ import { AfterViewInit, ViewChild, inject } from '@angular/core';
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { UntypedFormGroup } from '@angular/forms';
 // import { RiesgosService } from 'app/services/reportes/riesgos.service';
-import * as XLSX from 'xlsx';
+///import * as XLSX from 'xlsx';
 import * as moment from 'moment';
 import { Riesgo } from './riesgo.model';
 import { catchError } from 'rxjs';
-import { RiesgosService } from 'app/services/reportes/riesgos.service';
+import { RiesgosService } from 'app/services/reportes/riesgos.service';//loader.service.ts
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MaterialModule } from 'app/app/mimodule/material.module';
-import {MatSnackBar, MatSnackBarRef, MatSnackBarModule, SimpleSnackBar} from '@angular/material/snack-bar';
+import { MatSnackBar, MatSnackBarRef, MatSnackBarModule, SimpleSnackBar} from '@angular/material/snack-bar';
 import { DecimalPipe } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
+//import { MatLegacyProgressSpinnerModule as MatProgressSpinnerModule } from "@angular/material/legacy-progress-spinner";
+
 //import { CategoryService } from 'app/shared/services/category.service';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'app-riesgo',
@@ -21,6 +24,9 @@ import { HttpClient } from '@angular/common/http';
   styleUrls: ['./riesgo.component.scss'],
 })
 export class RiesgoComponent implements OnInit, AfterViewInit {
+  isLoading: Subject<boolean> = this.riesgoService.isLoading; // Variable para controlar la visibilidad del spinner
+  mostrarMensaje: boolean = true; // Variable de control
+
   private riesgosService = inject(RiesgosService);///
 
   decimalPipe = new DecimalPipe('en-US'); // 'en-US' se refiere al idioma y el formato de números que deseas usar
@@ -96,21 +102,20 @@ export class RiesgoComponent implements OnInit, AfterViewInit {
 
   }
 
-  obtenerDatosUsuario() {
+  obtenerDatosUsuario() {}
+
+  obtenerReporteProvisiones(){
     var lfecha = this.fechaSeleccionada;
-
-
-
-  //  const fechaFormateada = this.formatoFecha(lfecha); // Obtén el string formateado directamente
-
-  const fechaFormateada =moment(lfecha).format("DD-MM-YYYY");
+    //  const fechaFormateada = this.formatoFecha(lfecha); // Obtén el string formateado directamente
+    const fechaFormateada =moment(lfecha).format("DD-MM-YYYY");
     this.riesgoService.getReporteRiesgo(fechaFormateada).subscribe(
       (data) => {
         this.reportesRiesgo = data;
         this.dataSource = new MatTableDataSource(this.reportesRiesgo);
         this.createTable(this.reportesRiesgo);
         this.totalElements = data.length;
-
+        //this.isLoading = false;
+        this.mostrarMensaje = false;
       },
       (error) => {
         console.error(error);
