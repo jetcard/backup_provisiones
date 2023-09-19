@@ -17,6 +17,8 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import jakarta.servlet.ServletOutputStream;
 import jakarta.servlet.http.HttpServletResponse;
 
+import static com.popularsafi.util.PixelUtil.pixel2WidthUnits;
+
 public class CategoryExcelExporter {
 
     private XSSFWorkbook workbook;
@@ -32,13 +34,16 @@ public class CategoryExcelExporter {
     private void writeHeaderLine(String fechaProceso) {
         sheet = workbook.createSheet("Reporte de códigos de cuotas generadas al "+fechaProceso);
         sheet.setDisplayGridlines(false);
-        sheet.setColumnWidth(3, 25 * 256);
-        sheet.setColumnWidth(4, 25 * 256);
-        sheet.setColumnWidth(5, 25 * 256);
+
         CellRangeAddress mergedRegion0 = new CellRangeAddress(0,0,1,12);
         sheet.addMergedRegion(mergedRegion0);
         CellRangeAddress mergedRegion1 = new CellRangeAddress(2,3,1,1);
         sheet.addMergedRegion(mergedRegion1);
+
+
+        //sheet.setColumnWidth(1, 75 * 256);
+
+
         CellRangeAddress mergedRegion2 = new CellRangeAddress(2,3,2,2);
         sheet.addMergedRegion(mergedRegion2);
         CellRangeAddress mergedRegion3 = new CellRangeAddress(2,3,3,3);
@@ -79,7 +84,6 @@ public class CategoryExcelExporter {
         font.setFontHeight(11);
         styleHeaders.setFont(font);
 
-
         CellStyle styleHeadersCuotasIC = workbook.createCellStyle();
         styleHeadersCuotasIC.setVerticalAlignment(VerticalAlignment.CENTER);
         styleHeadersCuotasIC.setAlignment(HorizontalAlignment.CENTER);
@@ -95,12 +99,13 @@ public class CategoryExcelExporter {
         CellStyle styleHeaderYellow = workbook.createCellStyle();
         styleHeaderYellow.setFillForegroundColor(IndexedColors.YELLOW.getIndex());
         styleHeaderYellow.setFillPattern(FillPatternType.SOLID_FOREGROUND);
-        styleHeaderYellow.setAlignment(HorizontalAlignment.RIGHT);
+        styleHeaderYellow.setVerticalAlignment(VerticalAlignment.CENTER);
+        styleHeaderYellow.setAlignment(HorizontalAlignment.CENTER);
         styleHeaderYellow.setBorderTop(BorderStyle.THIN);
         styleHeaderYellow.setBorderBottom(BorderStyle.THIN);
         styleHeaderYellow.setBorderLeft(BorderStyle.THIN);
         styleHeaderYellow.setBorderRight(BorderStyle.THIN);
-        styleHeaderYellow.setAlignment(HorizontalAlignment.CENTER);
+        styleHeaderYellow.setWrapText(true);
         font.setBold(true);
         font.setFontHeight(11);
         styleHeaderYellow.setFont(font);
@@ -125,6 +130,7 @@ public class CategoryExcelExporter {
 
         setBordersToMergedCells(sheet, mergedRegion1);
         setBordersToMergedCells(sheet, mergedRegion2);
+
         setBordersToMergedCells(sheet, mergedRegion3);
         setBordersToMergedCells(sheet, mergedRegion4);
         setBordersToMergedCells(sheet, mergedRegion5);
@@ -134,19 +140,40 @@ public class CategoryExcelExporter {
         setBordersToMergedCells(sheet, mergedRegion9);
         setBordersToMergedCells(sheet, mergedRegion10);
         setBordersToMergedCells(sheet, mergedRegion11);
+
+        sheet.setColumnWidth(0, PixelUtil.pixel2WidthUnits(67) );
+        sheet.setColumnWidth(1, PixelUtil.pixel2WidthUnits(62) );//169*77%
+        sheet.setColumnWidth(2, PixelUtil.pixel2WidthUnits(88) );//283
+        sheet.setColumnWidth(3, PixelUtil.pixel2WidthUnits(88) );//397
+        sheet.setColumnWidth(4, PixelUtil.pixel2WidthUnits(66) );//483
+        sheet.setColumnWidth(5, PixelUtil.pixel2WidthUnits(95) );//603 //92
+        sheet.setColumnWidth(6, PixelUtil.pixel2WidthUnits(103) );//735
+        sheet.setColumnWidth(7, PixelUtil.pixel2WidthUnits(103) );//867
+        sheet.setColumnWidth(8, PixelUtil.pixel2WidthUnits(52) );//934
+        sheet.setColumnWidth(9, PixelUtil.pixel2WidthUnits(151) );//1126 //148
+        sheet.setColumnWidth(10, PixelUtil.pixel2WidthUnits(115) );//1275
+        sheet.setColumnWidth(11, PixelUtil.pixel2WidthUnits(117) );//1425
+        sheet.setColumnWidth(12, PixelUtil.pixel2WidthUnits(102) );//1556
+        sheet.setColumnWidth(13, PixelUtil.pixel2WidthUnits(71) );//1648
 /*
-        int width = 33; // Where width is number of caracters
-        sheet.setDefaultColumnWidth(width);*/
-        /*
-        sheet.setColumnWidth(3, 25 * 256);
-        sheet.setColumnWidth(4, 25 * 256);
-        sheet.setColumnWidth(5, 25 * 256);
-        */
+        sheet.setColumnWidth(0, PixelUtil.pixel2WidthUnits(88) );
+        sheet.setColumnWidth(1, PixelUtil.pixel2WidthUnits(81) );//169
+        sheet.setColumnWidth(2, PixelUtil.pixel2WidthUnits(114) );//283
+        sheet.setColumnWidth(3, PixelUtil.pixel2WidthUnits(114) );//397
+        sheet.setColumnWidth(4, PixelUtil.pixel2WidthUnits(86) );//483
+        sheet.setColumnWidth(5, PixelUtil.pixel2WidthUnits(120) );//603
+        sheet.setColumnWidth(6, PixelUtil.pixel2WidthUnits(132) );//735
+        sheet.setColumnWidth(7, PixelUtil.pixel2WidthUnits(100) );
+        sheet.setColumnWidth(8, PixelUtil.pixel2WidthUnits(100) );
+        sheet.setColumnWidth(9, PixelUtil.pixel2WidthUnits(100) );
+*/
+
     }
 
     private void createCell(Row row, int columnCount, Object value, CellStyle style) {
 
-        sheet.autoSizeColumn(columnCount);
+        //sheet.autoSizeColumn(columnCount);
+
         Cell cell = row.createCell(columnCount);
 
         if(value instanceof Integer) {
