@@ -1,19 +1,6 @@
 export interface Riesgo {
  
-  dvalor_BV: string;
-  cmoneda: string;
-  ncuota: string;
-  fdesembolso: string;
-  fpago: string;
-  monto: string;
-  tea: string;
-  diastrans: string;
-  interes: string;
-  interesprov: string;
-  igv: string;
-  total: string;
-
-  /*ndocumento: string;
+  ndocumento: string;
   tapaterno: string;
   tamaterno: string;
   tnombres: string;
@@ -38,8 +25,8 @@ export interface Riesgo {
   f_VALORIZACION : string;
   v_EDIFICACION: string;
   v_COMERCIAL: string;
-  s_INFOCORP: string;*/
-  /*cmoneda: string;
+  s_INFOCORP: string;
+  cmoneda: string;
   v_REALIZACIONSOL: string;
-  v_REALIZACIONDOL: string;*/
+  v_REALIZACIONDOL: string;
 }

@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class ClientService {
-  private apiUrl = 'http://localhost:8085/proyecto-reportes/api/reporte-calculo';
+  /*private apiUrl = 'http://localhost:8085/proyecto-reportes/api/reporte-calculo';
 
   constructor(private http: HttpClient, private authService: AuthService) { }
 
@@ -19,5 +19,5 @@ export class ClientService {
     //const url = `${this.apiUrl}/${fecha}`;
 
     return this.http.get<any>(url, { headers });
-  }
+  }*/
 }

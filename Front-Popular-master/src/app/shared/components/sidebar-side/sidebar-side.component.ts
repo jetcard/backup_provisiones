@@ -5,14 +5,12 @@ import { Subscription } from "rxjs";
 import { ILayoutConf, LayoutService } from "app/shared/services/layout.service";
 import { JwtAuthService } from "app/shared/services/auth/jwt-auth.service";
 import { UtilService } from 'app/shared/services/util.service';
-///import { SocialAuthService, GoogleLoginProvider, SocialUser } from '@abacritt/angularx-social-login';
 @Component({
   selector: "app-sidebar-side",
   templateUrl: "./sidebar-side.component.html"
 })
 export class SidebarSideComponent implements OnInit, OnDestroy, AfterViewInit {
   nombre: any;
-  ///socialUser!: SocialUser;
   public menuItems: any[];
   public hasIconTypeMenuItem: boolean;
   public iconTypeMenuTitle: string;
@@ -26,7 +24,6 @@ export class SidebarSideComponent implements OnInit, OnDestroy, AfterViewInit {
     public themeService: ThemeService,
     private layout: LayoutService,
     public jwtAuth: JwtAuthService
-    ///private socialAuthService: SocialAuthService
   ) {}
 
   ngOnInit() {

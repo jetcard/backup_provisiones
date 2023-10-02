@@ -6,23 +6,20 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
-import java.util.Date;
-
 @Data
 @NoArgsConstructor
 @Entity
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @AllArgsConstructor
-@NamedStoredProcedureQuery(
+/*@NamedStoredProcedureQuery(
         name = "ReporteRiesgo.procedureinfo",
         procedureName = "PKG_RIESGOS.SP_REPORTE_RIESGO",
         parameters = {
                 @StoredProcedureParameter(name = "PD_fecha", mode = ParameterMode.IN, type = Date.class),
                 @StoredProcedureParameter(name = "PO_CURSOR_RESULTADO", mode = ParameterMode.REF_CURSOR, type = Void.class )
         }
-)
+)*/
 public class ReporteRiesgo {
-
 
     @Id
     @Column(name = "CODIGOTCHN")
@@ -111,6 +108,9 @@ public class ReporteRiesgo {
 
     @Column(name = "F_VALORIZACION")
     private String F_VALORIZACION;
+
+    @Column(name = "ubigeo")
+    private String ubigeo;
 
     @Column(name = "ncuotas_generadas")
     private String ncuotas_generadas;

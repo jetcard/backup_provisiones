@@ -25,31 +25,13 @@ import { ErrorHandlerService } from './shared/services/error-handler.service';
 import { TokenInterceptor } from './shared/interceptors/token.interceptor';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { MaterialModule } from './app/mimodule/material.module';
+import { ProvisionesService } from './services/reportes/provisiones.service';
 import { RiesgosService } from './services/reportes/riesgos.service';
 import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 import { KeycloakAngularModule , KeycloakService} from 'keycloak-angular';
-///import { SocialLoginModule, SocialAuthServiceConfig } from '@abacritt/angularx-social-login';
-///import { GoogleLoginProvider } from '@abacritt/angularx-social-login';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { LoaderInterceptor } from './views/reporte/riesgo/loader.interceptor';
+import { LoaderInterceptor } from './shared/interceptors/loader.interceptor';
 
-function initializeKeycloak(keycloak: KeycloakService) {
-  return () =>
-    keycloak.init({
-      config: {
-        url: 'https://popularsafi.examensolucion.com/',
-        realm: 'PopularSAFI',
-        clientId: 'angular_client'
-      },
-      initOptions: {
-        onLoad: 'login-required',
-        flow: "standard",
-        silentCheckSsoRedirectUri:
-          window.location.origin + '/assets/silent-check-sso.html'
-      },
-      loadUserProfileAtStartUp: true
-    });
-}
 // AoT requires an exported function for factories    
 export function HttpLoaderFactory(httpClient: HttpClient) {
   return new TranslateHttpLoader(httpClient);
@@ -79,7 +61,6 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     RouterModule.forRoot(rootRouterConfig, { useHash: false }),
     KeycloakAngularModule,
     MatProgressSpinnerModule
-    ///SocialLoginModule
   ],
   declarations: [AppComponent, DashboardComponent],
   providers: [
@@ -97,28 +78,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
       useClass: LoaderInterceptor,
       multi: true,
     },
-    ///RiesgosService,
     ///{provide: LocationStrategy ,useClass:HashLocationStrategy},
-    /*{
-      provide: APP_INITIALIZER,
-      useFactory: initializeKeycloak,
-      multi: true,
-      deps: [KeycloakService]
-    }*/
-    /*{
-      provide: 'SocialAuthServiceConfig',
-      useValue: {
-        autoLogin: false,
-        providers: [
-          {
-            id: GoogleLoginProvider.PROVIDER_ID,
-            provider: new GoogleLoginProvider(
-              '32433234405-2edkdv6drevmr3g4isgdrpo2sto011uj.apps.googleusercontent.com'
-            )
-          }
-        ]
-      } as SocialAuthServiceConfig,
-    } */  
   ],
   bootstrap: [AppComponent]
 })

@@ -1,0 +1,149 @@
+<div class="body-container" id="div1" >
+
+  <!--mat-label>Fecha</mat-label-->
+
+  <mat-form-field class="md-12 container-fluid">
+    <input
+      matInput
+      name="desde"
+      placeholder="FECHA"
+      [matDatepicker]="appDatepicker"
+      [(ngModel)]="fechaSeleccionada"
+      (ngModelChange)="obtenerReporteProvisiones()"
+    />
+    <mat-hint>DD/MM/YYYY</mat-hint>
+
+    <mat-datepicker-toggle
+      matSuffix
+      [for]="appDatepicker"
+    ></mat-datepicker-toggle>
+  </mat-form-field>
+  <mat-datepicker #appDatepicker></mat-datepicker>
+
+  <button
+mat-raised-button
+color="primary"
+class="btn-secondary btn-lg"
+[disabled]=""
+(click)="exportExcel()"
+>
+<mat-icon>print</mat-icon>
+Exportar a Excel
+</button>
+
+</div>
+<hr>
+
+<div class="example-container">
+
+  <table  mat-table
+    [dataSource]="dataSource"
+    id="season-tble" 
+  >
+
+    <ng-container matColumnDef="dvalor_BV">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>C&oacute;digo</th>
+      <td mat-cell *matCellDef="let row">
+        {{ row.dvalor_BV }}
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="cmoneda">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Moneda</th>
+      <td mat-cell *matCellDef="let row" class="align-center-field">
+        {{ row.cmoneda }}
+      </td>
+    </ng-container>    
+    <ng-container matColumnDef="ncuota">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Cuota</th>
+      <td mat-cell *matCellDef="let row" class="align-center-field">
+        {{ row.ncuota }}
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="fdesembolso">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Fecha de desembolso</th>
+      <td mat-cell *matCellDef="let row" class="align-center-date">
+        {{ row.fdesembolso }}</td>
+    </ng-container>
+    <ng-container matColumnDef="fpago">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Fecha de Pago</th>
+      <td mat-cell *matCellDef="let row" class="align-center-date">
+        {{ row.fpago }}
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="monto">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Capital adeudado cronograma</th>
+      <td mat-cell *matCellDef="let row" class="align-right-money">{{ row.monto }}</td>
+    </ng-container>
+    <ng-container matColumnDef="tea">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>TEA</th>
+      <td mat-cell *matCellDef="let row" class="align-right-money">
+        {{ row.tea }}
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="diastrans">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Dias Transcurridos al Cierre</th>
+      <td mat-cell *matCellDef="let row" class="align-right-money">
+        {{ row.diastrans }}
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="interes">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Inter&eacute;s Compensatorio</th>
+      <td mat-cell *matCellDef="let row" class="align-right-money">
+        {{ row.interes }}
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="interesprov">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Inter&eacute;s Provisi&oacute;n</th>
+      <td mat-cell *matCellDef="let row" class="align-right-money">
+        {{ row.interesprov }}
+      </td> 
+    </ng-container>
+    <ng-container matColumnDef="igv">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>IGV</th>
+    <td mat-cell *matCellDef="let row" class="align-right-money">
+      {{ row.igv }}
+    </td> 
+    </ng-container>      
+      <ng-container matColumnDef="total">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Total</th>
+        <td mat-cell *matCellDef="let row" class="align-right-money">
+          {{ row.total }}
+      </td>
+    </ng-container>
+
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+  </table>
+</div>
+<!--div *ngIf="isLoading">
+ 
+  <mat-spinner></mat-spinner>
+ 
+</div-->
+
+<mat-paginator [pageSizeOptions]="[ 5,10,20,50, 100]" [length]="totalElements" aria-label="Select page of provision" (page)="showMore($event)"></mat-paginator>
+
+<div *ngIf="(isLoading | async); then loading else content"></div>
+<ng-template #loading>
+  <div class="overlay">
+    <div class="spinner"></div>
+  </div>
+</ng-template>
+<ng-template #content>
+  <div *ngIf="totalElements === 0 && mostrarMensaje"> 
+    <p>Por favor indique una fecha.</p>
+  </div>
+</ng-template>
+
+
+<!--div *ngIf="isLoading | async" class="overlay">
+  <div class="spinner"></div>
+  <--mat-progress-spinner value=100  mode="indeterminate"></mat-progress-spinner- ->
+</div>
+<div *ngIf="totalElements === 0"> 
+  <--p>No se encontraron datos para la fecha seleccionada.</p- ->
+  <p>Por favor indique una fecha.</p>
+</div-->
+
+

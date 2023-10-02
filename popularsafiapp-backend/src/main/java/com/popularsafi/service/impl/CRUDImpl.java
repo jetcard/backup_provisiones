@@ -1,7 +1,7 @@
 package com.popularsafi.service.impl;
 
 import com.popularsafi.exception.ModelNotFoundException;
-import com.popularsafi.repo.IGenericRepo;
+import com.popularsafi.repository.IGenericRepo;
 import com.popularsafi.service.ICRUD;
 
 import java.util.List;

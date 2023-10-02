@@ -1,10 +1,11 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { KeycloakService } from 'keycloak-angular';
-
+import { Subject  } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
 export class UtilService {
+  isLoading = new Subject<boolean>();
 
   constructor(private keycloakService: KeycloakService) { }
 
@@ -25,5 +26,13 @@ export class UtilService {
   }
   nombre(){
     return this.keycloakService.getUsername().substring(0,10);
+  }
+
+  show() {
+    this.isLoading.next(true);
+  }
+
+  hide() {
+    this.isLoading.next(false);
   }
 }

@@ -1,9 +1,9 @@
 package com.popularsafi.config;
 
-import com.popularsafi.dto.CalculoDTO;
+import com.popularsafi.dto.ProvisionDTO;
 import com.popularsafi.dto.FondoDTO;
 import com.popularsafi.dto.ReporteRiesgoDTO;
-import com.popularsafi.model.CalculoIC;
+import com.popularsafi.model.ReporteProvision;
 import com.popularsafi.model.Fondo;
 import com.popularsafi.model.ReporteRiesgo;
 import org.modelmapper.ModelMapper;
@@ -36,32 +36,31 @@ import java.text.SimpleDateFormat;
             return mapper;
         }
 
-        @Bean("calculoMapper")
+        @Bean("provisionMapper")
         public ModelMapper calculoICMapper() {
             DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
             logger.info("TimeUnitMillis "+dateFormat.format(System.currentTimeMillis()));
             ModelMapper mapper = new ModelMapper();
             //Escritura
-            TypeMap<CalculoDTO, CalculoIC> typeMap1 = mapper.createTypeMap(CalculoDTO.class, CalculoIC.class);
-            typeMap1.addMapping(CalculoDTO::getDVALOR_BV, (dest, v) -> dest.setDVALOR_BV((String) v));
-            typeMap1.addMapping(CalculoDTO::getCMONEDA, (dest, v) -> dest.setCMONEDA((String) v));
-            typeMap1.addMapping(CalculoDTO::getNCUOTA, (dest, v) -> dest.setNCUOTA((Integer) v));
-            typeMap1.addMapping(CalculoDTO::getFDESEMBOLSO, (dest, v) -> dest.setFDESEMBOLSO((String) v));
-            typeMap1.addMapping(CalculoDTO::getMONTO, (dest, v) -> dest.setMONTO((String) v));
-            typeMap1.addMapping(CalculoDTO::getFPAGO, (src, v) -> src.setFPAGO((String) v));
-            typeMap1.addMapping(CalculoDTO::getTEA, (dest, v) -> dest.setTEA((String) v));
-            typeMap1.addMapping(CalculoDTO::getDIASTRANS, (dest, v) -> dest.setDIASTRANS((String) v));
-            typeMap1.addMapping(CalculoDTO::getINTERES, (dest, v) -> dest.setINTERES((String) v));
-            typeMap1.addMapping(CalculoDTO::getINTERESPROV, (dest, v) -> dest.setINTERESPROV((String) v));
-            typeMap1.addMapping(CalculoDTO::getIGV, (dest, v) -> dest.setIGV((String) v));
-            typeMap1.addMapping(CalculoDTO::getTOTAL, (dest, v) -> dest.setTOTAL((String) v));
+            TypeMap<ProvisionDTO, ReporteProvision> typeMap1 = mapper.createTypeMap(ProvisionDTO.class, ReporteProvision.class);
+            typeMap1.addMapping(ProvisionDTO::getDVALOR_BV, (dest, v) -> dest.setDVALOR_BV((String) v));
+            typeMap1.addMapping(ProvisionDTO::getCMONEDA, (dest, v) -> dest.setCMONEDA((String) v));
+            typeMap1.addMapping(ProvisionDTO::getNCUOTA, (dest, v) -> dest.setNCUOTA((Integer) v));
+            typeMap1.addMapping(ProvisionDTO::getFDESEMBOLSO, (dest, v) -> dest.setFDESEMBOLSO((String) v));
+            typeMap1.addMapping(ProvisionDTO::getMONTO, (dest, v) -> dest.setMONTO((String) v));
+            typeMap1.addMapping(ProvisionDTO::getFPAGO, (src, v) -> src.setFPAGO((String) v));
+            typeMap1.addMapping(ProvisionDTO::getTEA, (dest, v) -> dest.setTEA((String) v));
+            typeMap1.addMapping(ProvisionDTO::getDIASTRANS, (dest, v) -> dest.setDIASTRANS((String) v));
+            typeMap1.addMapping(ProvisionDTO::getINTERES, (dest, v) -> dest.setINTERES((String) v));
+            typeMap1.addMapping(ProvisionDTO::getINTERESPROV, (dest, v) -> dest.setINTERESPROV((String) v));
+            typeMap1.addMapping(ProvisionDTO::getIGV, (dest, v) -> dest.setIGV((String) v));
+            typeMap1.addMapping(ProvisionDTO::getTOTAL, (dest, v) -> dest.setTOTAL((String) v));
             return mapper;
     }
 
-    @Bean("RiesgoMapper")
+    @Bean("riesgoMapper")
     public ModelMapper RiesgoMapper() {
         ModelMapper mapper = new ModelMapper();
-
         //Escritura
         TypeMap<ReporteRiesgoDTO, ReporteRiesgo> typeMap1 = mapper.createTypeMap(ReporteRiesgoDTO.class, ReporteRiesgo.class);
         typeMap1.addMapping(ReporteRiesgoDTO::getCODIGOTCHN, (dest, v) -> dest.setCODIGOTCHN((String) v));
@@ -93,6 +92,7 @@ import java.text.SimpleDateFormat;
         typeMap1.addMapping(ReporteRiesgoDTO::getV_REALIZACIONSOL, (dest, v) -> dest.setV_REALIZACIONSOL((String) v));
         typeMap1.addMapping(ReporteRiesgoDTO::getV_REALIZACIONDOL, (dest, v) -> dest.setV_REALIZACIONDOL((String) v));
         typeMap1.addMapping(ReporteRiesgoDTO::getF_VALORIZACION, (dest, v) -> dest.setF_VALORIZACION((String) v));
+        typeMap1.addMapping(ReporteRiesgoDTO::getUbigeo, (dest, v) -> dest.setUbigeo((String) v));
         typeMap1.addMapping(ReporteRiesgoDTO::getNcuotas_generadas, (dest, v) -> dest.setNcuotas_generadas((String) v));
         return mapper;
     }

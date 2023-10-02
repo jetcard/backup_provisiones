@@ -20,6 +20,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatButtonModule } from '@angular/material/button';
 import { RouterModule } from '@angular/router';
 import { FileUploadModule } from 'ng2-file-upload';
+import { ProvisionComponent } from './provision/provision.component';
 import { RiesgoComponent } from './riesgo/riesgo.component';
 import { HttpClientModule } from '@angular/common/http';
 
@@ -27,6 +28,7 @@ import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
+    ProvisionComponent,
     RiesgoComponent,
 
 

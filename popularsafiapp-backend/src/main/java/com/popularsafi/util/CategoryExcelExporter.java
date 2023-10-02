@@ -4,10 +4,9 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 
-import com.popularsafi.model.CalculoIC;
+import com.popularsafi.model.ReporteProvision;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.ss.util.CellRangeAddress;
-import org.apache.poi.ss.util.CellUtil;
 import org.apache.poi.ss.util.RegionUtil;
 import org.apache.poi.xssf.usermodel.XSSFCreationHelper;
 import org.apache.poi.xssf.usermodel.XSSFFont;
@@ -17,17 +16,15 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import jakarta.servlet.ServletOutputStream;
 import jakarta.servlet.http.HttpServletResponse;
 
-import static com.popularsafi.util.PixelUtil.pixel2WidthUnits;
-
 public class CategoryExcelExporter {
 
     private XSSFWorkbook workbook;
     private XSSFSheet sheet;
-    private List<CalculoIC> calculoIC;
+    private List<ReporteProvision> reporteProvision;
 
 
-    public CategoryExcelExporter (List<CalculoIC> listaCalculos) {
-        this.calculoIC = listaCalculos;
+    public CategoryExcelExporter (List<ReporteProvision> listaProvisions) {
+        this.reporteProvision = listaProvisions;
         workbook = new XSSFWorkbook();
     }
 
@@ -237,7 +234,7 @@ public class CategoryExcelExporter {
         styleYellow.setAlignment(HorizontalAlignment.RIGHT);
 
         int contadorRegistros=0;
-        for( CalculoIC result: calculoIC) {
+        for( ReporteProvision result: reporteProvision) {
 
             Row row = sheet.createRow(rowCount++);
             int columnCount = 1;

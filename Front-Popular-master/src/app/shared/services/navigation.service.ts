@@ -34,14 +34,11 @@ export class NavigationService {
     {
       name: 'Reportes',
       type: 'dropDown',
-      tooltip: 'Reporte',
+      tooltip: 'Reportes',
       icon: 'task',
       sub: [
         { name: 'Provisiones', state: 'reporte/provisiones' },
-        { name: 'Valorización ', state: 'reporte/valorizacion' },
-           { name: 'Analytics Alt', state: 'dashboard/analytics-alt' },
-           { name: 'Cryptocurrency', state: 'dashboard/crypto' },
-           { name: 'Dark Cards', state: 'dashboard/dark' },
+        { name: 'Riesgos ', state: 'reporte/riesgos' },
       ]
       // name: 'Reporte',
       // type: 'link',

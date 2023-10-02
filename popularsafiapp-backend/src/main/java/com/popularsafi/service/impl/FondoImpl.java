@@ -1,8 +1,8 @@
 package com.popularsafi.service.impl;
 
 import com.popularsafi.model.Fondo;
-import com.popularsafi.repo.IFondoRepo;
-import com.popularsafi.repo.IGenericRepo;
+import com.popularsafi.repository.IFondoRepo;
+import com.popularsafi.repository.IGenericRepo;
 import com.popularsafi.service.IFondoServ;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

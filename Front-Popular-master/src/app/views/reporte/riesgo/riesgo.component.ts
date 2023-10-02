@@ -1,12 +1,11 @@
 import { AfterViewInit, ViewChild, inject } from '@angular/core';
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { UntypedFormGroup } from '@angular/forms';
-// import { RiesgosService } from 'app/services/reportes/riesgos.service';
-///import * as XLSX from 'xlsx';
 import * as moment from 'moment';
 import { Riesgo } from './riesgo.model';
 import { catchError } from 'rxjs';
-import { RiesgosService } from 'app/services/reportes/riesgos.service';//loader.service.ts
+import { RiesgosService } from 'app/services/reportes/riesgos.service';
+import { UtilService } from 'app/shared/services/util.service';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MaterialModule } from 'app/app/mimodule/material.module';
@@ -24,10 +23,12 @@ import { Subject } from 'rxjs';
   styleUrls: ['./riesgo.component.scss'],
 })
 export class RiesgoComponent implements OnInit, AfterViewInit {
-  isLoading: Subject<boolean> = this.riesgoService.isLoading; // Variable para controlar la visibilidad del spinner
-  mostrarMensaje: boolean = true; // Variable de control
 
-  private riesgosService = inject(RiesgosService);///
+  private riesgosService = inject(RiesgosService);
+  private utilService = inject(UtilService);
+
+  isLoading: Subject<boolean> = this.utilService.isLoading; // Variable para controlar la visibilidad del spinner
+  mostrarMensaje: boolean = true; // Variable de control
 
   decimalPipe = new DecimalPipe('en-US'); // 'en-US' se refiere al idioma y el formato de números que deseas usar
 
@@ -42,19 +43,37 @@ export class RiesgoComponent implements OnInit, AfterViewInit {
   dataSource: MatTableDataSource<any>;
 
   displayedColumns: string[] = [
-    'dvalor_BV',
-    'cmoneda',
-    'ncuota',
+    'CODIGOTCHN',
+    'CMONEDA',
+    'ndocumento',
+    'tapaterno',
+    'tamaterno',
+    'tnombres',
+    'dnacimiento',
+    'tdireccion',
+    'cubigeo',
+    'departamento',
+    'provincia',
+    'distrito',
+    'cinmueble',
+    'actividad',
+    'saldo_actual',
+    'cuotasatrasdas',
+    'estado',
+    'cuota',
+    'sueldo',
     'fdesembolso',
-    'fpago',
-    'monto',
-    'tea',
-    'diastrans',
-    'interes',
-    'interesprov',
-    'igv',
-    'total'
-
+    'tipooperacion',
+    'S_INFOCORP',
+    'NVALORIZACION',
+    'V_EDIFICACION',
+    'V_PROPIEDAD',
+    'V_COMERCIAL',
+    'V_REALIZACIONSOL',
+    'V_REALIZACIONDOL',
+    'F_VALORIZACION',
+    'ubigeo',
+    'ncuotas_generadas'
   ];
 
   basicForm: UntypedFormGroup;
@@ -67,7 +86,6 @@ export class RiesgoComponent implements OnInit, AfterViewInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MaterialModule) materialModule: MaterialModule;
   constructor(
-    private riesgoService: RiesgosService,
     private _snackBar: MatSnackBar,
     private http: HttpClient
   ) { }
@@ -83,7 +101,7 @@ export class RiesgoComponent implements OnInit, AfterViewInit {
 
   obtenerReportesRiesgo(): void {
     const fechaFormateada = this.fecha.toISOString(); // Formatea la fecha en formato ISO 8601
-    this.riesgoService
+    this.riesgosService
       .getReporteRiesgo(fechaFormateada) // Envía la fecha formateada como string en el URL
       .pipe(
         catchError((error) => {
@@ -104,11 +122,11 @@ export class RiesgoComponent implements OnInit, AfterViewInit {
 
   obtenerDatosUsuario() {}
 
-  obtenerReporteProvisiones(){
+  obtenerReporteRiesgos(){
     var lfecha = this.fechaSeleccionada;
     //  const fechaFormateada = this.formatoFecha(lfecha); // Obtén el string formateado directamente
     const fechaFormateada =moment(lfecha).format("DD-MM-YYYY");
-    this.riesgoService.getReporteRiesgo(fechaFormateada).subscribe(
+    this.riesgosService.getReporteRiesgo(fechaFormateada).subscribe(
       (data) => {
         this.reportesRiesgo = data;
         this.dataSource = new MatTableDataSource(this.reportesRiesgo);
@@ -202,7 +220,7 @@ export class RiesgoComponent implements OnInit, AfterViewInit {
     this.dataSource = new MatTableDataSource(data);
     this.dataSource.paginator = this.paginator;
     //this.dataSource.sort = this.sort;
-
+/*
         // Aplica el formato solo a las columnas "monto" y "total"
         data.forEach((row) => {
           row.monto = this.decimalPipe.transform(parseFloat(row.monto), '1.2-2');
@@ -214,10 +232,10 @@ export class RiesgoComponent implements OnInit, AfterViewInit {
         });
     
         this.dataSource = new MatTableDataSource(data);
-        this.dataSource.paginator = this.paginator;
+        this.dataSource.paginator = this.paginator;*/
   }
   showMore(e: any){
-    this.riesgoService.listPageable(e.pageIndex, e.pageSize).subscribe(data => {
+    this.riesgosService.listPageable(e.pageIndex, e.pageSize).subscribe(data => {
 
       this.totalElements = data.totalElements;
       this.createTable(data.content);

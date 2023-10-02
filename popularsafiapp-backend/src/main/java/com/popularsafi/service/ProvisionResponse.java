@@ -1,6 +1,6 @@
 package com.popularsafi.service;
 
-import com.popularsafi.model.CalculoIC;
+import com.popularsafi.model.ReporteProvision;
 import lombok.Data;
 
 import java.util.List;
@@ -8,13 +8,13 @@ import java.util.List;
 @Data
 public class ProvisionResponse {
 
-    private List<CalculoIC> provision;
+    private List<ReporteProvision> provision;
 
-    public List<CalculoIC> getProvision() {
+    public List<ReporteProvision> getProvision() {
         return provision;
     }
 
-    public void setProvision(List<CalculoIC> provision) {
+    public void setProvision(List<ReporteProvision> provision) {
         this.provision = provision;
     }
 }

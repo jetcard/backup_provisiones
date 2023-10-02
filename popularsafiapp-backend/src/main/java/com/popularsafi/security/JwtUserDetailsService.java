@@ -1,7 +1,7 @@
 package com.popularsafi.security;
 
 import com.popularsafi.model.User;
-import com.popularsafi.repo.IUserRepo;
+import com.popularsafi.repository.IUserRepo;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;

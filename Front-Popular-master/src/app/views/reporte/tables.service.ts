@@ -1,6 +1,5 @@
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Riesgo } from './riesgo/riesgo.model';
 import { Observable } from 'rxjs';
 import { AuthService } from 'auth.service';
 

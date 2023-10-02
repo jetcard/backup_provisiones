@@ -1,107 +1,111 @@
 package com.popularsafi.dto;
 
-import jakarta.validation.constraints.NotEmpty;
+/*import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
+import lombok.NoArgsConstructor;*/
+import jakarta.persistence.Column;
+import lombok.*;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@EqualsAndHashCode(onlyExplicitlyIncluded = true)
+//@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class ReporteRiesgoDTO {
     @EqualsAndHashCode.Include
     private String CODIGOTCHN;
-    @NotNull
-    @NotEmpty
+    //@NotNull
+    //@NotEmpty
     private String CMONEDA;
-    @NotNull
-    @NotEmpty
+    //@NotNull
+    //@NotEmpty
     private String ndocumento;
-    @NotNull
-    @NotEmpty
+    //@NotNull
+    //@NotEmpty
     private String tapaterno;
-    @NotNull
-    @NotEmpty
+    //@NotNull
+    //@NotEmpty
     private String tamaterno;
-    @NotNull
-    @NotEmpty
+    //@NotNull
+    //@NotEmpty
     private String tnombres;
-    @NotNull
-    @NotEmpty
+    //@NotNull
+    //@NotEmpty
     private String dnacimiento;
-    @NotNull
-    @NotEmpty
+    //@NotNull
+    //@NotEmpty
     private String tdireccion;
-    @NotNull
-    @NotEmpty
+    //@NotNull
+    //@NotEmpty
     private String cubigeo;
-    @NotNull
-    @NotEmpty
+    //@NotNull
+    //@NotEmpty
     private String departamento;
-    @NotNull
-    @NotEmpty
+    //@NotNull
+    //@NotEmpty
     private String provincia;
-    @NotNull
-    @NotEmpty
+    //@NotNull
+    //@NotEmpty
     private String distrito;
-    @NotNull
-    @NotEmpty
+    //@NotNull
+    //@NotEmpty
     private String cinmueble;
-    @NotNull
-    @NotEmpty
+    //@NotNull
+    //@NotEmpty
     private String actividad;
-    @NotNull
-    @NotEmpty
+    //@NotNull
+    //@NotEmpty
     private String saldo_actual;
-    @NotNull
-    @NotEmpty
+    //@NotNull
+    //@NotEmpty
     private String cuotasatrasdas;
-    @NotNull
-    @NotEmpty
+    //@NotNull
+    //@NotEmpty
     private String estado;
-    @NotNull
-    @NotEmpty
+    //@NotNull
+    //@NotEmpty
     private String cuota;
-    @NotNull
-    @NotEmpty
+    //@NotNull
+    //@NotEmpty
     private String sueldo;
-    @NotNull
-    @NotEmpty
+    //@NotNull
+    //@NotEmpty
     private String fdesembolso;
-    @NotNull
-    @NotEmpty
+    //@NotNull
+    //@NotEmpty
     private String tipooperacion;
-    @NotNull
-    @NotEmpty
+    //@NotNull
+    //@NotEmpty
     private String S_INFOCORP;
-    @NotNull
-    @NotEmpty
+    //@NotNull
+    //@NotEmpty
     private String NVALORIZACION;
-    @NotNull
-    @NotEmpty
+    //@NotNull
+    //@NotEmpty
     private String V_EDIFICACION;
-    @NotNull
-    @NotEmpty
+    //@NotNull
+    //@NotEmpty
     private String V_PROPIEDAD;
-    @NotNull
-    @NotEmpty
+    //@NotNull
+    //@NotEmpty
     private String V_COMERCIAL;
-    @NotNull
-    @NotEmpty
+    //@NotNull
+    //@NotEmpty
     private String V_REALIZACIONSOL;
-    @NotNull
-    @NotEmpty
+    //@NotNull
+    //@NotEmpty
     private String V_REALIZACIONDOL;
 
-    @NotNull
-    @NotEmpty
+    //@NotNull
+    //@NotEmpty
     private String F_VALORIZACION;
 
-    @NotNull
-    @NotEmpty
+    private String ubigeo;
+
+    //@NotNull
+    //@NotEmpty
     private String ncuotas_generadas;
 
 }

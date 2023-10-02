@@ -37,6 +37,11 @@ export const rootRouterConfig: Routes = [
       {
         path: 'blank',
         loadChildren: () => import('./views/others/app-blank/app-blank.module').then(m => m.AppBlankModule),
+       data: { title: 'reporteprovision' }
+      },
+      {
+        path: 'blank',
+        loadChildren: () => import('./views/others/app-blank/app-blank.module').then(m => m.AppBlankModule),
        data: { title: 'reporteriesgo' }
       },
       {

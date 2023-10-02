@@ -1,5 +1,4 @@
 import { TestBed } from '@angular/core/testing';
-
 import { RiesgosService } from './riesgos.service';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
@@ -11,9 +10,8 @@ export class reportesRiesgoService {
     private http: HttpClient
   ) { }
   getAllRiesgo() {
-    return this.http.get<reportesRiesgoService[]>('http://localhost:8085/proyecto-reportes/api/reporte-calculo')
+    return this.http.get<reportesRiesgoService[]>('http://localhost:8085/proyecto-reportes/api/reporte-riesgo')
   }
-
 }
 
 describe('RiesgosService', () => {

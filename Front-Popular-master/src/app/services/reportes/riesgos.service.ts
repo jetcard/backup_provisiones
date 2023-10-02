@@ -1,25 +1,21 @@
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-///import { Riesgo } from 'app/views/reporte/riesgo/riesgo.model';
 import { AuthService } from 'auth.service';
-import { Observable, Subject  } from 'rxjs';
+import { Observable  } from 'rxjs';
 import { JwtAuthService } from 'app/shared/services/auth/jwt-auth.service';
 import { environment } from 'environments/environment';
 @Injectable({
   providedIn: 'root'
 })
 export class RiesgosService {
-  isLoading = new Subject<boolean>();
-  private apiUrl = `${environment.apiURL}/reporte-calculo`;
-  private apiUrl2 = `${environment.apiURL}/reporte-excel`;
+  private apiUrl = `${environment.apiURL}/reporte-riesgos`;
 
+  private apiUrlExcel = `${environment.apiURL}/reporte-riesgos-excel`;
 
   private reporteServices = btoa('user:b4530586-15c6-43cf-8c1d-960f426f1986');
   // Agregar credenciales para otros servicios si es necesario
 
   constructor(private http: HttpClient, private authService: AuthService,private serv :JwtAuthService ) { }
-
-
 
   getReporteServices(): string {
     return this.reporteServices;
@@ -95,19 +91,13 @@ export class RiesgosService {
       const headers = new HttpHeaders({
         Authorization: `Basic ${this.authService.getReporteServices()}`,
       });
-      const url = `${this.apiUrl2}/provision/export/excel?fechaExcel=${fechaFormateada}`;
+      const url = `${this.apiUrlExcel}/exportar-riesgos/excel?fechaProceso=${fechaFormateada}`;
       return this.http.get(url, {
         headers: new HttpHeaders().set('Authorization', `Bearer ${token.jwtToken}`).set('Content-Type', 'application/json'),
         responseType: 'blob'
       });
     }
-    show() {
-      this.isLoading.next(true);
-   }
- 
-   hide() {
-      this.isLoading.next(false);
-   }
+    
     /*
   exportaCategories(): Observable<any>{
     const token = JSON.parse(sessionStorage.getItem("JWT_TOKEN"));
@@ -120,12 +110,9 @@ export class RiesgosService {
     });
   }*/
 
-
+/*
   getDataConf() {
     return [
-       {
-         prop: 'id',
-       },
       {
         prop: 'dvalor_BV',
         name: 'dvalor_BV',
@@ -258,7 +245,7 @@ export class RiesgosService {
       {
         prop: 'ncuotas_generadas',
         name: 'ncuotas_generadas',
-      }*/
+      }
     ];
-  }
+  }*/
 }

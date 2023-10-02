@@ -8,8 +8,6 @@ import { SignupComponent } from "./signup/signup.component";
 import { NotfoundComponent } from "./not-found/not-found.component";
 import { ErrorComponent } from "./error/error.component";
 import { ContactoSoporteComponent } from "./contacto-soporte/contacto-soporte.component";
-///import { RiesgoComponent } from "../reporte/riesgo/riesgo.component";
-
 
 export const SessionsRoutes: Routes = [
   {

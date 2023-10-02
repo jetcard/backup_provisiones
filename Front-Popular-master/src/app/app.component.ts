@@ -1,4 +1,5 @@
 import { Component, OnInit, AfterViewInit, Renderer2 } from '@angular/core';
+import { KeycloakService } from 'keycloak-angular';
 import { Title } from '@angular/platform-browser';
 import { Router, NavigationEnd, ActivatedRoute, ActivatedRouteSnapshot } from '@angular/router';
 
@@ -10,20 +11,16 @@ import { ThemeService } from './shared/services/theme.service';
 import { LayoutService } from './shared/services/layout.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { MatDivider } from '@angular/material/divider';
-///import { SocialAuthService, GoogleLoginProvider, SocialUser } from '@abacritt/angularx-social-login';
-
-///import { MaterialModule } from './app/mimodule/material.module';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  ///styleUrls: ['./app.component.css']
+  styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit, AfterViewInit {
   appTitle = 'Egret';
   pageTitle = '';
   users: any;
-  ///socialUser!: SocialUser;
   isLoggedin: boolean = false;  
   constructor(
     public title: Title,
@@ -33,18 +30,13 @@ export class AppComponent implements OnInit, AfterViewInit {
     private iconService: UILibIconService,
     private layoutService: LayoutService,
     private http: HttpClient,
-    ///private socialAuthService: SocialAuthService
+    private readonly keycloak: KeycloakService
   ) {
     iconService.init()
   }
 
   ngOnInit(): void {
     this.changePageTitle();
-    /*this.socialAuthService.authState.subscribe((user) => {
-      this.socialUser = user;
-      this.isLoggedin = (user != null);
-      console.log(this.socialUser);
-    });*/
   }
 
   ngAfterViewInit() {
